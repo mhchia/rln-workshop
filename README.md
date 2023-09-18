@@ -1,6 +1,9 @@
 # RLN Workshop @ zkplayground.tw
 
-https://zkplayground.tw/
+This is a demonstration of how RLN can be used in the [RLN workshop](https://docs.google.com/presentation/d/16plPnuDyLYKPbPsJos6348wNsurjla255Y6nM1xI9AY/edit?usp=sharing) at [zkplayground.tw](https://zkplayground.tw/).
+
+
+![Architecture](./assets/architecture.png)
 
 ## Prerequisites
 ### 1. Use node v16 or above.
@@ -15,8 +18,6 @@ node --version
 - Should be some ethers in your wallet.
 - Add testing token `0x122488C20C026BAE7e139c4e61255d0fd60c88F1` to your wallet
   - Should be `1000` RLNWT in your wallet.
-
-## Fix `FIXME`s to make the app work :D
 
 ## Run
 
@@ -35,6 +36,9 @@ npm run build-and-run-server
 ```bash
 open http://localhost:8080
 ```
+
+## Fix `FIXME`s to make the app work :D
+Or, see the branch [complete](https://github.com/mhchia/rln-workshop/tree/complete) for the complete code.
 
 ## Contract Addresses
 - RLNWorkshop RLN Contract: http://goerli.etherscan.io/address/0xc0B896A89eba94Bd6DA2a6c85118e7856172F9C4

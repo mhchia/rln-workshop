@@ -51,23 +51,6 @@ async function init() {
     }
 
     // FIXME: 1. Create RLN instances for user and slasher
-    [userRLN, slasherRLN] = await Promise.all([
-        RLN.createWithContractRegistry({
-            provider,
-            signer,
-            contractAddress: rlnWorkshopContractAddress,
-            contractAtBlock: rlnWorkshopContractAtBlock,
-            rlnIdentifier,
-            identity,
-        }),
-        RLN.createWithContractRegistry({
-            provider,
-            signer,
-            contractAddress: rlnWorkshopContractAddress,
-            contractAtBlock: rlnWorkshopContractAtBlock,
-            rlnIdentifier,
-        })
-    ])
     isInitialized = true;
     console.log("Finished initialization")
     setButtonsState(true);
@@ -79,7 +62,7 @@ async function register() {
         return;
     }
     // FIXME: 2. User registers with the message limit
-    await userRLN.register(messageLimit);
+
 }
 
 async function sendMessage() {
@@ -95,17 +78,13 @@ async function sendMessage() {
 
     console.log("Creating proof for message")
     // FIXME: 3. User creates a proof for message
-    const proof = await userRLN.createProof(epoch, message);
 
     // FIXME: 4. User verifies the proof before sending it
-    if (!await userRLN.verifyProof(epoch, message, proof)) {
-        throw new Error("Proof is not valid")
-    }
 
     console.log("Sending message")
     // FIXME: 5. User sends the proof (message) to the RLN Workshop contract
     // Hint: use the helper function in this file to send the proof to the contract
-    await sendProofToContract(proof);
+
     console.log(`Sent message: epoch=${epoch}, message=${message}`);
 
     // Clear the input after sending the message
@@ -147,7 +126,7 @@ async function runSlasher() {
                 rlnIdentifier,
             }
             // FIXME: 6. Slasher saves the proof and checks if the user can be slashed
-            const res = await slasherRLN.saveProof(fullProof)
+
             if (res.status == Status.VALID || res.status == Status.DUPLICATE) {
                 // DO NOTHING
             } else if (res.status == Status.BREACH) {
@@ -161,7 +140,7 @@ async function runSlasher() {
                     console.log(`Slasher: user ${identityCommitment} can be slashed`)
                     try {
                         // FIXME: 7. Slasher slashes any user that exceeds their message limit
-                        await slasherRLN.slash(identitySecret, slashReceiver)
+
                         console.log(`Slasher: slashed ${identityCommitment}: secret=${identitySecret}}`)
                     } catch (e) {
                         console.error("Slasher: failed to slash: ", e)

@@ -148,6 +148,7 @@ async function runSlasher() {
                 epoch,
                 rlnIdentifier,
             }
+            // FIXME: 6. Slasher saves the proof and checks if the user can be slashed
             const res = await slasherRLN.saveProof(fullProof)
             if (res.status == Status.VALID || res.status == Status.DUPLICATE) {
                 // DO NOTHING
@@ -161,7 +162,7 @@ async function runSlasher() {
                 if (canSlash) {
                     console.log(`Slasher: user ${identityCommitment} can be slashed`)
                     try {
-                        // FIXME: 6. Slasher slashes any user that exceeds their message limit
+                        // FIXME: 7. Slasher slashes any user that exceeds their message limit
                         await slasherRLN.slash(identitySecret, slashReceiver)
                         console.log(`Slasher: slashed ${identityCommitment}: secret=${identitySecret}}`)
                     } catch (e) {

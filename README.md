@@ -10,7 +10,11 @@ node --version
 
 ### 2. Ensure Metamask is installed in your browser.
 
-### 3. Check your have balance of the testing token in your Metamask wallet.
+### 3. Check your balance in your Metamask wallet.
+- Use the Goerli testnet.
+- Should be some ethers in your wallet.
+- Add testing token `0x9834BBA30277B437cc818986DB5d6D935c6Fd7Bf` to your wallet
+  - Should be `5000` RLNWT in your wallet.
 
 ## Run
 
@@ -31,4 +35,7 @@ open http://localhost:8080
 ```
 
 ## Contract Addresses
-- Modified RLN Contract (RLNWorkshop): http://goerli.etherscan.io/address/0xaa713e6A3aba909E635Fd43a49ba5dE6D172fbfa
+- RLNWorkshop RLN Contract: http://goerli.etherscan.io/address/0xD770B6B31Be078Ef758fCA98e7eC8F98B88d41cd
+- RLNWorkshopToken Contract: http://goerli.etherscan.io/address/0x9834BBA30277B437cc818986DB5d6D935c6Fd7Bf
+- RLNVerifier Contract: http://goerli.etherscan.io/address/0x54bc1BBd20A699Ab4cD9dCba6eA2F89Cf77FbA14
+- Withdraw Verifier Contract: http://goerli.etherscan.io/address/0x92b73EAE297E68EbFf1dBc6Bb1a4Ac4472622Ec4

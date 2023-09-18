@@ -6,14 +6,9 @@ This is a demonstration of how RLN can be used in the [RLN workshop](https://doc
 ![Architecture](./assets/architecture.png)
 
 ## Prerequisites
-### 1. Use node v16 or above.
-```bash
-node --version
-```
+### 1. Ensure Metamask is installed in your browser.
 
-### 2. Ensure Metamask is installed in your browser.
-
-### 3. Check your balance in your Metamask wallet.
+### 2. Check your balance in your Metamask wallet.
 - Use the Goerli testnet.
 - Should be some ethers in your wallet.
 - Add testing token `0x122488C20C026BAE7e139c4e61255d0fd60c88F1` to your wallet

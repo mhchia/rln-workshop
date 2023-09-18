@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { DEFAULT_MERKLE_TREE_DEPTH, RLN, RLNFullProof, Status, calculateIdentityCommitment, getDefaultRLNParams, getDefaultWithdrawParams } from "rlnjs";
+import { RLN, RLNFullProof, Status, calculateIdentityCommitment } from "rlnjs";
 import { Identity } from "@semaphore-protocol/identity";
 
 
@@ -105,19 +105,6 @@ async function sendMessage() {
     messageInput.value = "";
 }
 
-async function sendProofToContract(proof: RLNFullProof) {
-    const publicSignals = proof.snarkProof.publicSignals;
-    const txSendMessage = await rlnContract.sendMessage(
-        publicSignals.y,
-        publicSignals.root,
-        publicSignals.nullifier,
-        publicSignals.x,
-        publicSignals.externalNullifier,
-        proofToArray(proof.snarkProof.proof),
-    )
-    await txSendMessage.wait()
-}
-
 type EventNewMessage = {
     x: bigint,
     y: bigint,
@@ -218,6 +205,18 @@ async function sleep(seconds: number) {
     return new Promise(resolve => setTimeout(resolve, seconds * 1000));
 }
 
+async function sendProofToContract(proof: RLNFullProof) {
+    const publicSignals = proof.snarkProof.publicSignals;
+    const txSendMessage = await rlnContract.sendMessage(
+        publicSignals.y,
+        publicSignals.root,
+        publicSignals.nullifier,
+        publicSignals.x,
+        publicSignals.externalNullifier,
+        proofToArray(proof.snarkProof.proof),
+    )
+    await txSendMessage.wait()
+}
 
 function proofToArray(proof: any) {
     return [

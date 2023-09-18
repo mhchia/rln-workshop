@@ -12,7 +12,7 @@ const rlnWorkshopContractAtBlock = 9716796
 // Unique id for an app using RLN.
 // This must be different than other app otherwise
 const rlnIdentifier = BigInt(5566)
-// User's message limit. By default it should be 1
+// User's message limit
 const messageLimit = BigInt(1);
 // Current timestamp. Now we use a constant value for simplicity
 const epoch = BigInt(1234);
@@ -53,21 +53,19 @@ async function init() {
     // FIXME: 1. Create RLN instances for user and slasher
     [userRLN, slasherRLN] = await Promise.all([
         RLN.createWithContractRegistry({
-            /* Required */
-            rlnIdentifier,
             provider,
-            contractAddress: rlnWorkshopContractAddress,
-            identity,
-            /* Optional */
-            contractAtBlock: rlnWorkshopContractAtBlock,
             signer,
+            contractAddress: rlnWorkshopContractAddress,
+            contractAtBlock: rlnWorkshopContractAtBlock,
+            rlnIdentifier,
+            identity,
         }),
         RLN.createWithContractRegistry({
-            rlnIdentifier,
             provider,
+            signer,
             contractAddress: rlnWorkshopContractAddress,
             contractAtBlock: rlnWorkshopContractAtBlock,
-            signer,
+            rlnIdentifier,
         })
     ])
     isInitialized = true;
@@ -80,7 +78,7 @@ async function register() {
         console.error("RLN not initialized");
         return;
     }
-    // FIXME: 2. User registers
+    // FIXME: 2. User registers with the message limit
     await userRLN.register(messageLimit);
 }
 
@@ -106,7 +104,7 @@ async function sendMessage() {
 
     console.log("Sending message")
     // FIXME: 5. User sends the proof (message) to the RLN Workshop contract
-    // Tip: use `sendProofToContract` function
+    // Hint: use the helper function in this file to send the proof to the contract
     await sendProofToContract(proof);
     console.log(`Sent message: epoch=${epoch}, message=${message}`);
 
@@ -176,6 +174,8 @@ async function runSlasher() {
         await sleep(5)
     }
 }
+
+
 
 
 async function getNewMessages() {
